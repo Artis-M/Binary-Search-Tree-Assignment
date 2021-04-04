@@ -97,7 +97,7 @@ public abstract class BinaryTree {
             }
             if (node.getLeftChild() != null)
             {
-                preList.add(2*index + 1, node.getRightChild());
+                preList.add(2*index + 1, node.getLeftChild());
                 q.offer(node.getLeftChild());
             }
         }

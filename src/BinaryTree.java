@@ -1,3 +1,5 @@
+import jdk.nashorn.api.tree.ArrayLiteralTree;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -71,5 +73,35 @@ public abstract class BinaryTree {
     {
         if(isEmpty()) return null;
 
+    }
+
+    public ArrayList<BinaryTreeNode> preOrder()
+    {
+        if(isEmpty()) return null;
+
+        Queue<BinaryTreeNode> q = new LinkedList<>();
+        q.offer(root);
+
+        ArrayList<BinaryTreeNode> preList = new ArrayList<>();
+        preList.add(root);
+
+        while (!q.isEmpty())
+        {
+            BinaryTreeNode node = q.poll();
+            int index = preList.indexOf(node);
+
+            if (node.getRightChild() != null)
+            {
+                preList.add(2*(index + 1), node.getRightChild());
+                q.offer(node.getRightChild());
+            }
+            if (node.getLeftChild() != null)
+            {
+                preList.add(2*index + 1, node.getRightChild());
+                q.offer(node.getLeftChild());
+            }
+        }
+
+        return preList;
     }
 }

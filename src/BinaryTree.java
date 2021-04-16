@@ -3,7 +3,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
-public abstract class BinaryTree {
+public class BinaryTree {
 
     private BinaryTreeNode root;
 
@@ -54,24 +54,23 @@ public abstract class BinaryTree {
 
         while (!q.isEmpty()) {
             BinaryTreeNode node = q.poll();
+            if (node.getElement() == element) return true;
             if (node.getLeftChild() != null) {
-                if (node.getElement() == element) return true;
                 q.offer(node.getLeftChild());
             }
 
             if (node.getRightChild() != null) {
-                if (node.getElement() == element) return true;
                 q.offer(node.getRightChild());
             }
         }
         return false;
     }
 
-    public ArrayList<BinaryTreeNode> inOrder() {
+    public ArrayList<Integer> inOrder() {
 
         if (isEmpty()) return null;
         Stack<BinaryTreeNode> stack = new Stack<>();
-        ArrayList<BinaryTreeNode> finalTraversal = new ArrayList<>();
+        ArrayList<Integer> finalTraversal = new ArrayList<>();
         BinaryTreeNode current = root;
 
         while (!stack.isEmpty() || current != null) {
@@ -83,7 +82,7 @@ public abstract class BinaryTree {
            }
 
            current = stack.pop();
-           finalTraversal.add(current);
+           finalTraversal.add(current.getElement());
            current = current.getRightChild();
 
 
@@ -101,19 +100,19 @@ public abstract class BinaryTree {
         return finalTraversal;
     }
 
-    public ArrayList<BinaryTreeNode> preOrder()
+    public ArrayList<Integer> preOrder()
     {
         if(isEmpty()) return null;
 
         Stack<BinaryTreeNode> q = new Stack<BinaryTreeNode>();
         q.push(root);
 
-        ArrayList<BinaryTreeNode> preList = new ArrayList<>();
+        ArrayList<Integer> preList = new ArrayList<>();
 
         while (!q.isEmpty())
         {
             BinaryTreeNode node = q.pop();
-            preList.add(node);
+            preList.add(node.getElement());
 
             if (node.getRightChild() != null)
             {
@@ -128,9 +127,9 @@ public abstract class BinaryTree {
         return preList;
     }
 
-    public ArrayList<BinaryTreeNode> levelOrder()
+    public ArrayList<Integer> levelOrder()
     {
-        if(isEmpty()) return null;
+        /*if(isEmpty()) return null;
 
         Queue<BinaryTreeNode> q = new LinkedList<>();
         q.offer(root);
@@ -155,13 +154,31 @@ public abstract class BinaryTree {
             }
         }
 
-        return levelOrder;
+        return levelOrder; */
+
+        ArrayList<Integer> res = new ArrayList<Integer>();
+        if (root == null)
+            return null;
+
+        Queue<BinaryTreeNode> q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty())
+        {
+            root = q.peek();
+            res.add(root.getElement());
+            q.poll();
+            if (root.getLeftChild() != null)
+                q.add(root.getLeftChild());
+            if (root.getRightChild() != null)
+                q.add(root.getRightChild());
+        }
+        return res;
     }
 
-    public ArrayList<BinaryTreeNode> postOrder() {
+    public ArrayList<Integer> postOrder() {
 
         if (root == null) return null;
-        ArrayList<BinaryTreeNode> postList = new ArrayList<>();
+        ArrayList<Integer> postList = new ArrayList<>();
 
 
         Stack stack1 = new Stack<>();
@@ -185,7 +202,7 @@ public abstract class BinaryTree {
 
         while (!stack2.isEmpty()) {
             BinaryTreeNode temp = (BinaryTreeNode) stack2.pop();
-            postList.add(temp);
+            postList.add(temp.getElement());
         }
         return postList;
     }

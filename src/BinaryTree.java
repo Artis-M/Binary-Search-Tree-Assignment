@@ -1,11 +1,10 @@
-import jdk.nashorn.api.tree.ArrayLiteralTree;
-
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
 public abstract class BinaryTree {
+
     private BinaryTreeNode root;
 
     public BinaryTree(BinaryTreeNode root) {
@@ -71,22 +70,33 @@ public abstract class BinaryTree {
     public ArrayList<BinaryTreeNode> inOrder() {
 
         if (isEmpty()) return null;
-        Queue<BinaryTreeNode> q = new LinkedList<>();
+        Stack<BinaryTreeNode> stack = new Stack<>();
         ArrayList<BinaryTreeNode> finalTraversal = new ArrayList<>();
         BinaryTreeNode current = root;
-        q.offer(current);
 
-        while (!q.isEmpty() || current != null) {
-            if(current != null)
-            {
-                q.offer(current);
-                current = current.getLeftChild();
-            }
-            else
-            {
-                finalTraversal.add(q.poll());
-                current = current.getRightChild();
-            }
+        while (!stack.isEmpty() || current != null) {
+
+           while(current != null)
+           {
+               stack.push(current);
+               current = current.getLeftChild();
+           }
+
+           current = stack.pop();
+           finalTraversal.add(current);
+           current = current.getRightChild();
+
+
+//            if(current != null)
+//            {
+//                q.offer(current);
+//                current = current.getLeftChild();
+//            }
+//            else
+//            {
+//                finalTraversal.add(q.poll());
+//                current = current.getRightChild();
+//            }
         }
         return finalTraversal;
     }
@@ -135,12 +145,12 @@ public abstract class BinaryTree {
 
             if (node.getRightChild() != null)
             {
-                levelOrder.add(2(index + 1), node.getRightChild());
+                levelOrder.add(2*(index + 1), node.getRightChild());
                 q.offer(node.getRightChild());
             }
             if (node.getLeftChild() != null)
             {
-                levelOrder.add(2index + 1, node.getLeftChild());
+                levelOrder.add(2*index + 1, node.getLeftChild());
                 q.offer(node.getLeftChild());
             }
         }
@@ -178,5 +188,19 @@ public abstract class BinaryTree {
             postList.add(temp);
         }
         return postList;
+    }
+
+    private int height(BinaryTreeNode node)
+    {
+        if (node == null || (node.getLeftChild() == null && node.getRightChild() == null))
+        {
+            return 0;
+        }
+        return 1 + Math.max(height(node.getLeftChild()), height(node.getRightChild()));
+    }
+
+    public int height()
+    {
+        return height(getRoot());
     }
 }

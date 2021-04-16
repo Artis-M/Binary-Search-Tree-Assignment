@@ -54,13 +54,13 @@ public abstract class BinaryTree {
 
         while (!q.isEmpty()) {
             BinaryTreeNode node = q.poll();
+            if (node.getElement() == element) return true;
+
             if (node.getLeftChild() != null) {
-                if (node.getElement() == element) return true;
                 q.offer(node.getLeftChild());
             }
 
             if (node.getRightChild() != null) {
-                if (node.getElement() == element) return true;
                 q.offer(node.getRightChild());
             }
         }

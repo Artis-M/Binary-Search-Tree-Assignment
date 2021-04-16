@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BinaryTreeTest {
 
-    private BinaryTreeNode treeRoot; // value 10
-    private BinaryTree tree; // size 3
+    private BinaryTreeNode treeRoot;
+    private BinaryTree tree;
 
     @org.junit.jupiter.api.BeforeEach
     void setUp() {

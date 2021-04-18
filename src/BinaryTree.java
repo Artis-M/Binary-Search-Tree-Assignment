@@ -23,7 +23,7 @@ public class BinaryTree {
         return root == null;
     }
 
-    public int getSize() {
+    public int size() {
         if (isEmpty()) return 0;
 
         Queue<BinaryTreeNode> q = new LinkedList<>();
@@ -85,17 +85,6 @@ public class BinaryTree {
            finalTraversal.add(current.getElement());
            current = current.getRightChild();
 
-
-//            if(current != null)
-//            {
-//                q.offer(current);
-//                current = current.getLeftChild();
-//            }
-//            else
-//            {
-//                finalTraversal.add(q.poll());
-//                current = current.getRightChild();
-//            }
         }
         return finalTraversal;
     }
@@ -129,33 +118,6 @@ public class BinaryTree {
 
     public ArrayList<Integer> levelOrder()
     {
-        /*if(isEmpty()) return null;
-
-        Queue<BinaryTreeNode> q = new LinkedList<>();
-        q.offer(root);
-
-        ArrayList<BinaryTreeNode> levelOrder = new ArrayList<>();
-        levelOrder.add(root);
-
-        while (!q.isEmpty())
-        {
-            BinaryTreeNode node = q.poll();
-            int index = levelOrder.indexOf(node);
-
-            if (node.getRightChild() != null)
-            {
-                levelOrder.add(2*(index + 1), node.getRightChild());
-                q.offer(node.getRightChild());
-            }
-            if (node.getLeftChild() != null)
-            {
-                levelOrder.add(2*index + 1, node.getLeftChild());
-                q.offer(node.getLeftChild());
-            }
-        }
-
-        return levelOrder; */
-
         ArrayList<Integer> res = new ArrayList<Integer>();
         if (root == null)
             return null;
@@ -180,13 +142,10 @@ public class BinaryTree {
         if (root == null) return null;
         ArrayList<Integer> postList = new ArrayList<>();
 
-
         Stack stack1 = new Stack<>();
         Stack stack2 = new Stack<>();
 
-
         stack1.push(root);
-
 
         while (!stack1.isEmpty()) {
 
@@ -198,7 +157,6 @@ public class BinaryTree {
             if (temp.getRightChild() != null)
                 stack1.push(temp.getRightChild());
         }
-
 
         while (!stack2.isEmpty()) {
             BinaryTreeNode temp = (BinaryTreeNode) stack2.pop();

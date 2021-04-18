@@ -36,6 +36,7 @@ public class BinarySearchTree extends BinaryTree{
         return Collections.min(valueList);
     }
 
+    //this is used for the removeElement method
     private int findMin(BinaryTreeNode node)
     {
         if (node == null)
@@ -138,32 +139,24 @@ public class BinarySearchTree extends BinaryTree{
 
         while (x != null) {
             y = x;
-            if (element < x.getElement())
+            if(element == x.getElement())
+            {
+                return;
+            }
+            else if (element < x.getElement())
+            {
                 x = x.getLeftChild();
+            }
             else
+            {
                 x = x.getRightChild();
+            }
         }
 
         if (element < y.getElement())
             y.addLeftChild(newNode);
         else
             y.addRightChild(newNode);
-    }
-
-    private BinaryTreeNode rotateRight(BinaryTreeNode y) {
-        BinaryTreeNode x = y.getLeftChild();
-        BinaryTreeNode z = x.getRightChild();
-        x.addRightChild(y);
-        y.addLeftChild(z);
-        return x;
-    }
-
-    private BinaryTreeNode rotateLeft(BinaryTreeNode y) {
-        BinaryTreeNode x = y.getRightChild();
-        BinaryTreeNode z = x.getLeftChild();
-        x.addLeftChild(y);
-        y.addRightChild(z);
-        return x;
     }
 
 }

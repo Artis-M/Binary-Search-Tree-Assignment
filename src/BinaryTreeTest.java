@@ -2,8 +2,6 @@ import org.junit.jupiter.api.Assertions;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class BinaryTreeTest {
 
     private BinaryTreeNode treeRoot;
@@ -41,16 +39,13 @@ class BinaryTreeTest {
 
     @org.junit.jupiter.api.Test
     void getSize() {
-        Assertions.assertEquals(5, tree.getSize());
+        Assertions.assertEquals(5, tree.size());
     }
 
     @org.junit.jupiter.api.Test
     void contains() {
-        //root
         Assertions.assertTrue(tree.contains(1));
-        //left child
         Assertions.assertTrue(tree.contains(2));
-        //right child
         Assertions.assertTrue(tree.contains(3));
         Assertions.assertTrue(tree.contains(4));
         Assertions.assertTrue(tree.contains(5));
